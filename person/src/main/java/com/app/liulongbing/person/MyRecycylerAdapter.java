@@ -1,10 +1,12 @@
 package com.app.liulongbing.person;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -31,9 +33,15 @@ public class MyRecycylerAdapter extends RecyclerView.Adapter<MyRecycylerAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        PersonItem personItem = lists.get(position);
+        final PersonItem personItem = lists.get(position);
         holder.mTitle.setText(personItem.getTitle());
         holder.mDesc.setText(personItem.getDesc());
+        holder.mItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mContext.startActivity(new Intent(mContext,personItem.getCls()));
+            }
+        });
     }
 
     @Override
@@ -44,11 +52,13 @@ public class MyRecycylerAdapter extends RecyclerView.Adapter<MyRecycylerAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView mTitle;
         TextView mDesc;
+        LinearLayout mItem;
 
         public ViewHolder(View itemView) {
             super(itemView);
             mTitle = (TextView) itemView.findViewById(R.id.tv_title);
             mDesc = (TextView) itemView.findViewById(R.id.tv_desc);
+            mItem = (LinearLayout) itemView.findViewById(R.id.ll_person_item);
         }
     }
 
