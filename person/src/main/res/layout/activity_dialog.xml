@@ -42,5 +42,17 @@
         android:layout_height="wrap_content"
         android:text="时间选择对话框"
         />
+    <Button
+        android:id="@+id/bt_6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="多选对话框"
+        />
+    <Button
+        android:id="@+id/bt_7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="自定义退出对话框"
+        />
 
 </LinearLayout>

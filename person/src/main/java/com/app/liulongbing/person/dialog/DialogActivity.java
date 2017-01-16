@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
@@ -21,6 +22,11 @@ import java.util.Calendar;
 
 /**
  * Created by liulongbing on 17/1/14.
+ */
+
+/**
+ * 1.material-dialogs  地址:https://github.com/afollestad/material-dialogs#table-of-contents-commons
+ * 2.FlycoDialog_Master 地址:https://github.com/H07000223/FlycoDialog_Master
  */
 
 public class DialogActivity extends AppCompatActivity{
@@ -77,6 +83,19 @@ public class DialogActivity extends AppCompatActivity{
             }
         });
 
+        findViewById(R.id.bt_6).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert6();
+            }
+        });
+
+        findViewById(R.id.bt_7).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alert7();
+            }
+        });
     }
 
 
@@ -84,6 +103,7 @@ public class DialogActivity extends AppCompatActivity{
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("温馨提示");
         builder.setMessage("确定要退出吗?");
+        builder.setCancelable(false);
         builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -91,6 +111,12 @@ public class DialogActivity extends AppCompatActivity{
             }
         });
         builder.setNegativeButton("否", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.setNeutralButton("忽略", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -112,6 +138,7 @@ public class DialogActivity extends AppCompatActivity{
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Log.i("========",datas[which]);
+                dialog.dismiss();
 
             }
         });
@@ -120,7 +147,15 @@ public class DialogActivity extends AppCompatActivity{
     }
 
     private void alert3(){
-        ProgressDialog progressDialog =ProgressDialog.show(this, "提示", "正在下载文件...", true, false);
+        //ProgressDialog progressDialog =ProgressDialog.show(this, "提示", "正在下载文件...", true, true);
+        //progressDialog.setProgressStyle(ProgressDialog.BUTTON_NEGATIVE);
+
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("提示");
+        progressDialog.setMessage("正在下载文件...");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.show();
     }
 
     private void alert4(){
@@ -153,6 +188,32 @@ public class DialogActivity extends AppCompatActivity{
                 calendar.get(Calendar.MINUTE),
                 true
         ).show();
+    }
+
+    private void alert6(){
+
+        String[] items = {"篮球","足球","排球","乒乓球","羽毛球"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(" 选择你喜欢的运动");
+        builder.setMultiChoiceItems(items, null, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                //dialog.dismiss();
+            }
+        });
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        builder.create().show();
+
+    }
+
+    private void alert7(){
+        new ExitDialog(this,R.style.ExitDialogStyle).show();
     }
 
 }

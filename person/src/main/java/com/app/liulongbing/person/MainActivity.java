@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.app.liulongbing.person.dialog.DialogActivity;
+import com.app.liulongbing.person.phone.PhoneActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private List<PersonItem> getData(){
         List<PersonItem> lists = new ArrayList<PersonItem>();
         lists.add(new PersonItem("对话框","常用对话框的学习以及自定义对话框", DialogActivity.class));
-        //lists.add(new PersonItem("RecyclerView","列表学习",));
+        lists.add(new PersonItem("手机相关信息","手机相关信息学习总结", PhoneActivity.class));
         return lists;
     }
 
